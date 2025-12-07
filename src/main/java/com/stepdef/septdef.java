@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import io.cucumber.java.AfterAll;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class septdef {
@@ -45,7 +45,7 @@ public void click_login_button() {
 	driver.findElement(By.xpath("//*[@type=\"submit\"]")).click();
 }
 
-@When("Login successful and see logout button")
+@Then("Login successful and see logout button")
 public void login_successful_and_see_logout_button() {
 	
 	boolean logstatus = driver.findElement(By.xpath("//*[text()=\"Logout\"]")).isDisplayed();
@@ -62,7 +62,7 @@ public void enter_invalid_password() {
 	driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("tudent123@");
 }
 
-@When("Login fail and see error message")
+@Then("Login fail and see error message")
 public void login_fail_and_see_error_message() {
 	try {
 		boolean logstatus = driver.findElement(By.xpath("//*[text()=\"Logout\"]")).isDisplayed();
@@ -81,7 +81,34 @@ public void enter_empty_username() {
 @When("Enter empty password")
 public void enter_empty_password() {
 	driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("");
-   
+	
 }
+
+	@When("Enter username {string}")
+	public void enter_username(String username) {
+		driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys(username);
+	    
+	}
+
+	@When("Enter passwrod {string}")
+	public void enter_passwrod(String password) {
+	   
+		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(password);
+	
+}
+	
+	@When("check login status")
+	public void check_login_status() {
+	
+		
+		try {
+			boolean logcheck = driver.findElement(By.xpath("//*[text()=\"Logout\"]")).isDisplayed();
+			System.out.println(logcheck);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 }
 
